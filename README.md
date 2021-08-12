@@ -36,10 +36,10 @@
 
 ### Association
 
-- belongs_tp :users
-- belongs_to :buys
+- belongs_to :user
+- belongs_to :buy
 
-## shopping_address テーブル
+## shopping_addresses テーブル
 
 | Column           | Type       |Options                         |
 | ------           | ---------- | ------------------------------ |
@@ -53,16 +53,17 @@
 
 ### Association
 
-- belongs_to :buys
+- has_one :buy
 
 ## buys テーブル
 
-| Column     | Type       |Options                         |
-| ------     | ---------- | ------------------------------ |
-| users      | references | null: false, foreign_key: true |
-| items      | references | null: false, foreign_key: true |
+| Column    | Type       |Options                         |
+| ------    | ---------- | ------------------------------ |
+| user      | references | null: false, foreign_key: true |
+| item      | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :users
-- belongs_to :items
+- belongs_to :user
+- belongs_to :item
+- belongs_to :shopping_address
