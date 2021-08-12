@@ -30,14 +30,14 @@
 | region_id         | integer     | null: false                    |
 | shopping_date_id  | integer     | null: false                    |
 | price             | integer     | null: false                    |
-| users             | references  | null: false, foreign_key: true |
+| user             | references  | null: false, foreign_key: true |
 
 
 
 ### Association
 
 - belongs_to :user
-- belongs_to :buy
+- has_one :buy
 
 ## shopping_addresses テーブル
 
@@ -53,7 +53,7 @@
 
 ### Association
 
-- has_one :buy
+- belongs_to :buy
 
 ## buys テーブル
 
@@ -66,4 +66,4 @@
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :shopping_address
+- has_one :shopping_address
