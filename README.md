@@ -11,54 +11,58 @@
 | first_name         | string   | null: false               |
 | last_name_kana     | string   | null: false               |
 | first_name_kana    | string   | null: false               |
-| birthday           | string   | null: false               |
+| birthday           | date     | null: false               |
 
 ### Association
 
-- has_many :protocols
-- has_many :comment
+- has_many :items
+- has_many :buys
 
 ## items テーブル
 
-| Column         | Type    | Options                        |
-| ------         | ------  | -----------                    |
-| product_name   | text    | null: false                    |
-| description    | text    | null: false                    |
-| category       | string  | null: false                    |
-| condition      | string  | null: false                    |
-| postage        | string  | null: false                    |
-| region         | string  | null: false                    |
-| shopping_date  | string  | null: false                    |
-| price          | integer | null: false                    |
-| seller_id      | string  | null: false, foreign_key: true |
-| buyer_id       | string  | null: false, foreign_key: true |
+| Column            | Type        | Options                        |
+| ------            | ------      | -----------                    |
+| product_name      | string      | null: false                    |
+| description       | text        | null: false                    |
+| category_id       | integer     | null: false                    |
+| condition_id      | integer     | null: false                    |
+| postage_id        | integer     | null: false                    |
+| region_id         | integer     | null: false                    |
+| shopping_date_id  | integer     | null: false                    |
+| price             | integer     | null: false                    |
+| users             | references  | null: false, foreign_key: true |
 
 
 
 ### Association
 
-- has_many :comment
-- belongs_to :user
+- belongs_tp :users
+- belongs_to :buys
 
 ## shopping_address テーブル
 
 | Column           | Type       |Options                         |
 | ------           | ---------- | ------------------------------ |
-| postal_code      | integer    | null: false, foreign_key: true |
-| prefectures      | string     | null: false, foreign_key: true |
+| postal_code      | string     | null: false                    |
+| prefecture_id    | integer    | null: false                    |
 | municipalities   | string     | null: false                    |
 | house_number     | string     | null: false                    |
-| building_name    | string     | null: false                    |
-| phone_number     | integer    | null: false                    |
+| building_name    | string     |                                |
+| phone_number     | string     | null: false                    |
+| buy              | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :user
-- belongs_to :protocol
+- belongs_to :buys
 
-## buy テーブル
+## buys テーブル
 
 | Column     | Type       |Options                         |
 | ------     | ---------- | ------------------------------ |
-| buyer      | references | null: false, foreign_key: true |
-| product    | references | null: false, foreign_key: true |
+| users      | references | null: false, foreign_key: true |
+| items      | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :users
+- belongs_to :items
