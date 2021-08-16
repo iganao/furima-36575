@@ -22,6 +22,9 @@ class Item < ApplicationRecord
     validates :image
   end
   
+  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
+  validates :product_name, length: {maximum: 40}
+  validates :description, length: {maximum: 1000}
 
   validates :category_id, :condition_id, :postage_id, :region_id, :shopping_date_id, numericality: { other_than: 1 , message: "can't be blank"}
 
