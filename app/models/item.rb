@@ -1,20 +1,27 @@
 class Item < ApplicationRecord
   belongs_to :user
-  has_one :buy
+  # has_one :buy
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :category_id
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :condition_id
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :postage_id
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :region_id
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :shopping_date_id
+  belongs_to :category
+  belongs_to :condition
+  belongs_to :postage
+  belongs_to :region
+  belongs_to :shopping_date
 
-  validates :image, :product_name, :description, :category_id, :condition_id, :postage_id, :region_id, :shopping_date_id, :price, :user, presence: true
+  with_options presence: true do
+    validates :product_name 
+    validates :price 
+    validates :description
+    validates :category_id
+    validates :condition_id
+    validates :postage_id
+    validates :region_id
+    validates :shopping_date_id
+    validates :image
+  end
+  
 
   validates :category_id, :condition_id, :postage_id, :region_id, :shopping_date_id, numericality: { other_than: 1 , message: "can't be blank"}
 
