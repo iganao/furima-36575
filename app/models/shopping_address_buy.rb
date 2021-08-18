@@ -1,16 +1,21 @@
 class ShoppingAddressBuy
   include ActiveModel::Model
-  attr_accessor :postal_code,:prefecture_id, :municipalities, :house_number, :building_name, :phone_number, :buy, :user, :item
+  attr_accessor :postal_code, :prefecture_id, :municipalities, :house_number, :building_name, :phone_number, :buy, :user_id, :item_id
 
   with_options presence: true do
-    validates :postal_code
     validates :municipalities
     validates :house_number
-    validates :phone_number
   end
-  validates :prefecture_id, numericality: {other_than: 0, message: "can't be blank"}
+  validates :prefecture_id, presence: true, numericality: {other_than: 0, message: "can't be blank"}
+
+  POSTAL_CODE_REGEX = /\A\d{3}[-]?\d{4}\z/
+  validates :postal_code, presence: true, format: { with: POSTAL_CODE_REGEX }
+
+  PHONE_NUMBER_REGEX = /\A(0{1}\d{9,10})\z/
+  validates :phone_number, presence: true, format: { with: PHONE_NUMBER_REGEX }
 
   def save
-    # 各テーブルにデータを保存する処理を書く
+    buy = Buy.create( user_id: user_id, item_id: item_id)
+    ShoppingAddress.create(postal_code: postal_code, prefecture_id: prefecture_id, municipalities: municipalities, house_number: house_number, building_name: building_name, phone_number: phone_number, buy_id: buy.id)
   end
 end
