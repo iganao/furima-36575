@@ -8,7 +8,7 @@ class ShoppingAddressBuy
   end
   validates :prefecture_id, presence: true, numericality: {other_than: 0, message: "can't be blank"}
 
-  POSTAL_CODE_REGEX = /\A\d{3}[-]?\d{4}\z/
+  POSTAL_CODE_REGEX = /\A\d{3}[-]\d{4}\z/
   validates :postal_code, presence: true, format: { with: POSTAL_CODE_REGEX }
 
   PHONE_NUMBER_REGEX = /\A(0{1}\d{9,10})\z/
