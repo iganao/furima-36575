@@ -42,8 +42,8 @@ class OrdersController < ApplicationController
     redirect_to root_path if @item.buy.present?
   end
 
-  def move_index
+  def user_index
     @item = Item.find(params[:item_id])
-    redirect_to root_path if @item.user
+    redirect_to root_path if current_user ==@item.user
   end
 end
