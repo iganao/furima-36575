@@ -7,6 +7,8 @@ class ShoppingAddressBuy
     validates :municipalities
     validates :house_number
     validates :token
+    validates :item_id
+    validates :user_id
   end
   validates :prefecture_id, presence: true, numericality: { other_than: 0, message: "can't be blank" }
 

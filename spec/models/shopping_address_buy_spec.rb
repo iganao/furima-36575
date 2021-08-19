@@ -92,6 +92,18 @@ RSpec.describe ShoppingAddressBuy, type: :model do
         @shopping_address_buy.valid?
         expect(@shopping_address_buy.errors.full_messages).to include("Token can't be blank")
       end
+
+      it 'userが紐付いていない場合は登録できないこと' do
+        @shopping_address_buy.user_id = nil
+        @shopping_address_buy.valid?
+        expect(@shopping_address_buy.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'itemが紐付いていない場合は登録できないこと' do
+        @shopping_address_buy.item_id = nil
+        @shopping_address_buy.valid?
+        expect(@shopping_address_buy.errors.full_messages).to include("Item can't be blank")
+      end
     end
   end
 end
