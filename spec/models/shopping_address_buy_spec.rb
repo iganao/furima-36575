@@ -6,6 +6,7 @@ RSpec.describe ShoppingAddressBuy, type: :model do
       user = FactoryBot.create(:user)
       item = FactoryBot.create(:item)
       @shopping_address_buy = FactoryBot.build(:shopping_address_buy, user_id: user.id, item_id: item.id)
+      sleep 0.1
     end
 
   context '内容に問題ない場合' do
@@ -85,6 +86,12 @@ RSpec.describe ShoppingAddressBuy, type: :model do
         @shopping_address_buy.phone_number = '011-1111-1111'
         @shopping_address_buy.valid?
         expect(@shopping_address_buy.errors.full_messages).to include("Phone number is invalid")
+      end
+
+      it "tokenが空では登録できないこと" do
+        @shopping_address_buy.token = nil
+        @shopping_address_buy.valid?
+        expect(@shopping_address_buy.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
