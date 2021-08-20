@@ -10,7 +10,7 @@ class ShoppingAddressBuy
     validates :item_id
     validates :user_id
   end
-  validates :prefecture_id, presence: true, numericality: { other_than: 0, message: "can't be blank" }
+  validates :prefecture_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
 
   POSTAL_CODE_REGEX = /\A\d{3}-\d{4}\z/
   validates :postal_code, presence: true, format: { with: POSTAL_CODE_REGEX, allow_blank: true }
